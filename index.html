@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date-wise Calendar Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">SORTMYEVENTS</div>
+        <div class="header-right">
+            <button class="admin-button" onclick="toggleAdmin()">Admin Access</button>
+        </div>
+    </header>
+    <div class="calendar" id="calendar">
+        <div class="date-row">
+            <div class="row-box">
+                <div class="event-date">01 JAN</div>
+                <div class="event-name">New Year's Celebration</div>
+                <div class="event-action">
+                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="date-row">
+            <div class="row-box">
+                <div class="event-date">01 JAN</div>
+                <div class="event-name">Family Gathering</div>
+                <div class="event-action">
+                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="date-row">
+            <div class="row-box">
+                <div class="event-date">02 JAN</div>
+                <div class="event-name">Work Meeting</div>
+                <div class="event-action">
+                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="date-row">
+            <div class="row-box">
+                <div class="event-date">02 JAN</div>
+                <div class="event-name">Lunch with Friends</div>
+                <div class="event-action">
+                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="date-row">
+            <div class="row-box">
+                <div class="event-date">03 JAN</div>
+                <div class="event-name">Gym Session</div>
+                <div class="event-action">
+                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="date-row">
+            <div class="row-box">
+                <div class="event-date">04 JAN</div>
+                <div class="event-name">Shopping</div>
+                <div class="event-action">
+                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="date-row">
+            <div class="row-box">
+                <div class="event-date">05 JAN</div>
+                <div class="event-name">Relax at Home</div>
+                <div class="event-action">
+                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
+                </div>
+            </div>
+        </div>
+        <button type="button" id="add-category">Add Event</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
