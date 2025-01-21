@@ -7,12 +7,14 @@ function toggleAdmin() {
     // Toggle visibility of delete buttons
     const deleteButtons = document.querySelectorAll('.delete-btn');
     deleteButtons.forEach(button => {
-        if (button.style.display === 'none') {
-            button.style.display = 'inline-block'; // Show the delete button
-        } else {
-            button.style.display = 'none'; // Hide the delete button
-        }
+        button.style.display = button.style.display === 'none' ? 'inline-block' : 'none';
     });
+
+    // Toggle visibility of "Add Event" button
+    const addEventButton = document.getElementById('add-category');
+    if (addEventButton) {
+        addEventButton.style.display = addEventButton.style.display === 'none' ? 'block' : 'none';
+    }
 
     // Toggle the button text
     const adminButton = document.querySelector('.admin-button');
