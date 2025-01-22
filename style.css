@@ -49,6 +49,12 @@ body {
     margin-bottom: 10px;
 }
 
+.drag-handle {
+    cursor: grab;
+    margin-right: 10px;
+    display: none;
+}
+
 .row-box {
     display: flex;
     justify-content: space-between;
@@ -130,3 +136,5 @@ button {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 }
+
+
