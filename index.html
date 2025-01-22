@@ -14,8 +14,9 @@
         </div>
     </header>
     <div class="calendar" id="calendar">
-        <div class="date-row">
+        <div class="date-row" draggable="true">
             <div class="row-box">
+                <span class="drag-handle">☰</span>
                 <div class="event-date">01 JAN</div>
                 <div class="event-name">New Year's Celebration</div>
                 <div class="event-action">
@@ -23,8 +24,9 @@
                 </div>
             </div>
         </div>
-        <div class="date-row">
+        <div class="date-row" draggable="true">
             <div class="row-box">
+                <span class="drag-handle">☰</span>
                 <div class="event-date">01 JAN</div>
                 <div class="event-name">Family Gathering</div>
                 <div class="event-action">
@@ -32,8 +34,9 @@
                 </div>
             </div>
         </div>
-        <div class="date-row">
+        <div class="date-row" draggable="true">
             <div class="row-box">
+                <span class="drag-handle">☰</span>
                 <div class="event-date">02 JAN</div>
                 <div class="event-name">Work Meeting</div>
                 <div class="event-action">
@@ -41,8 +44,9 @@
                 </div>
             </div>
         </div>
-        <div class="date-row">
+        <div class="date-row" draggable="true">
             <div class="row-box">
+                <span class="drag-handle">☰</span>
                 <div class="event-date">02 JAN</div>
                 <div class="event-name">Lunch with Friends</div>
                 <div class="event-action">
@@ -50,37 +54,12 @@
                 </div>
             </div>
         </div>
-        <div class="date-row">
-            <div class="row-box">
-                <div class="event-date">03 JAN</div>
-                <div class="event-name">Gym Session</div>
-                <div class="event-action">
-                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
-                </div>
-            </div>
-        </div>
-        <div class="date-row">
-            <div class="row-box">
-                <div class="event-date">04 JAN</div>
-                <div class="event-name">Shopping</div>
-                <div class="event-action">
-                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
-                </div>
-            </div>
-        </div>
-        <div class="date-row">
-            <div class="row-box">
-                <div class="event-date">05 JAN</div>
-                <div class="event-name">Relax at Home</div>
-                <div class="event-action">
-                    <button class="delete-btn" onclick="deleteRow(this)" style="display: none;">Delete</button>
-                </div>
-            </div>
-        </div>
+        <!-- Additional rows... -->
         <div class="add-event-container" style="text-align: center; margin-top: 20px;">
             <button type="button" id="add-category" style="display: none;">Add Event</button>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
