@@ -8,7 +8,7 @@ body {
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: #ffffff;
     padding: 30px 60px;
@@ -17,6 +17,7 @@ body {
 .header-left {
     font-size: 1.5em;
     font-weight: bold;
+    align-content: center;
 }
 
 .header-right .admin-button {
@@ -110,7 +111,7 @@ button {
 @media screen and (max-width: 768px) {
     .header {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         background-color: #ffffff;
         padding: 30px 12px;
