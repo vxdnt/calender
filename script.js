@@ -107,6 +107,9 @@ function handleDragStart(event) {
     draggedRow = event.target;
     setTimeout(() => {
         event.target.style.display = 'none';
+        // Disable editing of content while dragging
+        const editableElements = document.querySelectorAll('.date-row[draggable="true"] [contenteditable="true"]');
+        editableElements.forEach(element => element.setAttribute('contenteditable', 'false'));
     }, 0);
 }
 
@@ -117,7 +120,10 @@ function handleDragOver(event) {
 
 // Handle entering the drop target
 function handleDragEnter(event) {
-    event.target.classList.add('over');
+    // Make sure the drop target is not the dragged row itself
+    if (event.target !== draggedRow) {
+        event.target.classList.add('over');
+    }
 }
 
 // Handle leaving the drop target
@@ -130,16 +136,17 @@ function handleDrop(event) {
     event.preventDefault();
     event.target.classList.remove('over');
 
-    if (draggedRow !== event.target) {
+    // Ensure that the drop target is within the same container and is not the dragged element itself
+    if (draggedRow !== event.target && event.target.closest('.date-row') !== draggedRow) {
         const allRows = [...document.querySelectorAll('.date-row')];
         const draggedIndex = allRows.indexOf(draggedRow);
-        const targetIndex = allRows.indexOf(event.target);
+        const targetIndex = allRows.indexOf(event.target.closest('.date-row'));
 
         // Move the dragged row before or after the target row based on the index
         if (draggedIndex < targetIndex) {
-            event.target.parentNode.insertBefore(draggedRow, event.target.nextSibling);
+            event.target.closest('.date-row').parentNode.insertBefore(draggedRow, event.target.closest('.date-row').nextSibling);
         } else {
-            event.target.parentNode.insertBefore(draggedRow, event.target);
+            event.target.closest('.date-row').parentNode.insertBefore(draggedRow, event.target.closest('.date-row'));
         }
     }
 }
@@ -149,6 +156,10 @@ function handleDragEnd(event) {
     event.target.style.display = 'block';
     draggedRow = null;
     document.querySelectorAll('.date-row').forEach(row => row.classList.remove('over'));
+
+    // Re-enable editing for all content after dragging
+    const editableElements = document.querySelectorAll('.date-row[draggable="true"] [contenteditable="true"]');
+    editableElements.forEach(element => element.setAttribute('contenteditable', 'true'));
 }
 
 // Call enableDragAndDrop on initial load
