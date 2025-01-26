@@ -181,5 +181,27 @@
                 <div class="event-name">Arjit Singh | Indore</div>
             </div>
     </div>
+
+    <script>
+        // JavaScript to add dynamic href to each event row
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll(".row-box");
+            rows.forEach(row => {
+                const eventName = row.querySelector(".event-name")?.textContent.trim();
+                if (eventName) {
+                    const encodedMessage = encodeURIComponent(`Hey, I want to buy tickets for ${eventName}`);
+                    const phone = "917715039001"; // Default WhatsApp number
+                    const href = `https://wa.me/${phone}?text=${encodedMessage}`;
+
+                    const anchor = document.createElement("a");
+                    anchor.href = href;
+                    anchor.className = "row-box";
+                    anchor.innerHTML = row.innerHTML;
+
+                    row.replaceWith(anchor); // Replace the original row with the anchor
+                }
+            });
+        });
+    </script>
 </body>
 </html>
