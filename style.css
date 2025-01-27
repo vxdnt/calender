@@ -8,6 +8,7 @@ body {
 
 .header {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
@@ -20,6 +21,11 @@ body {
     align-content: center;
 }
 
+.header p{
+    margin-top: 0px;
+    font-size: 13px;
+}
+
 .calendar {
     max-width: 500px;
     margin: 20px auto;
@@ -28,6 +34,11 @@ body {
     border-radius: 8px;
     border: 1px solid #000000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .date-row {
@@ -59,16 +70,30 @@ body {
     padding-left: 10px;
 }
 
-a{
-    text-decoration: none;
-    color: inherit;
+.search-container {
+    margin: 10px auto;
+    text-align: center;
 }
+
+.search-bar {
+    width: 400px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
 @media screen and (max-width: 768px) {
     .header-left {
         font-size: 1.2em;
     }
 
     .calendar {
+        width: 80%;
+    }
+
+    .search-bar{
         width: 80%;
     }
 }
