@@ -3,116 +3,577 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sortmyevents</title>
+    <title>SortMyEvents</title>
     <meta name="description" content="Explore events around you!!">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1551031844284343" crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-1551031844284343">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L1WBQDYSX8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1WBQDYSX8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L1WBQDYSX8');
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  gtag('config', 'G-L1WBQDYSX8');
-</script>
-    <link rel="stylesheet" href="style.css">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 40px 20px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header background animation removed */
+
+        .header-left {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #000000;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: slideInDown 1s ease-out 0.3s forwards;
+        }
+
+        .header-subtitle {
+            font-size: 1.1em;
+            color: #666;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        @keyframes slideInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Search bar styles removed */
+
+        .calendar {
+            max-width: 600px;
+            margin: 20px auto 40px;
+            padding: 30px 25px;
+            animation: slideInUp 1s ease-out 1.2s forwards;
+        }
+
+        .events-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #000000;
+            position: relative;
+        }
+
+        .events-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #3B82F6, #1D4ED8);
+            border-radius: 2px;
+        }
+
+        .row-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background-color: #ffffff;
+            margin-bottom: 12px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(-30px);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .row-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #3B82F6, #1D4ED8);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .row-box:hover {
+            transform: translateY(-2px) translateX(8px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15);
+            border-color: #3B82F6;
+        }
+
+        .row-box:hover::before {
+            transform: scaleY(1);
+        }
+
+        .row-box:active {
+            transform: translateY(0) translateX(4px);
+        }
+
+        .event-date {
+            font-weight: 700;
+            color: #000000;
+            width: 80px;
+            text-align: left;
+            font-size: 15px;
+            position: relative;
+        }
+
+        .event-name {
+            color: #000000;
+            text-align: left;
+            flex: 1;
+            padding-left: 20px;
+            font-weight: 500;
+        }
+
+        /* .event-icon styles removed */
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2s forwards;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .footer p:first-child {
+            font-size: 12px;
+        }
+
+        .footer p:last-child {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 16px;
+            display: none;
+        }
+
+        .no-results-icon {
+            font-size: 48px;
+            color: #3B82F6;
+            margin-bottom: 15px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .header-left {
+                font-size: 2em;
+            }
+
+            .calendar {
+                width: 90%;
+                padding: 25px 20px;
+                margin: 20px auto;
+            }
+
+            .search-wrapper {
+                width: 90%;
+            }
+
+            .row-box {
+                padding: 15px;
+            }
+
+            .event-name {
+                padding-left: 15px;
+                font-size: 14px;
+            }
+
+            .event-date {
+                font-size: 13px;
+                width: 70px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header {
+                padding: 20px 15px 15px;
+            }
+
+            .header-left {
+                font-size: 1.5em;
+            }
+
+            .calendar {
+                width: 95%;
+            }
+
+            .row-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .event-name {
+                padding-left: 0;
+            }
+
+            .event-icon {
+                margin-left: 0;
+                align-self: flex-end;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
         <div class="header-left">SortMyEvents</div>
+        <div class="header-subtitle">Discover amazing events around you</div>
     </header>
 
-    <div class="search-container">
-        <input type="text" id="searchBar" class="search-bar" placeholder="Search events..." oninput="filterEvents()">
-    </div>
+    <!-- Search bar removed -->
 
     <div class="calendar" id="calendar">
-            <div class="row-box">
-                <div class="event-date">01 AUG</div>
-                <div class="event-name">Novak & Vidojean</div>
-            </div>
-            <div class="row-box">
-                <div class="event-date">04 OCT</div>
-                <div class="event-name">DGTL | Mumbai</div>
-            </div>
-            <div class="row-box">
-                <div class="event-date">05 OCT</div>
-                <div class="event-name">DGTL | Mumbai</div>
-            </div>
-            <div class="row-box">
-                <div class="event-date">10 OCT</div>
-                <div class="event-name">Francis Mercier</div>
-            </div>
-            <div class="row-box">
-                <div class="event-date">18 OCT</div>
-                <div class="event-name">Travis Scott | Delhi</div>
-            </div>
+        <h2 class="events-title">Upcoming Events</h2>
+        
         <div class="row-box">
-                <div class="event-date">19 OCT</div>
-                <div class="event-name">Travis Scott | Delhi</div>
+            <div class="event-date">20 SEP</div>
+            <div class="event-name">Road to Sounds Good Festival | Mumbai</div>
         </div>
+
         <div class="row-box">
-                <div class="event-date">29 OCT</div>
-                <div class="event-name">Enrique Iglesias</div>
+            <div class="event-date">21 SEP</div>
+            <div class="event-name">Road to Sounds Good Festival | Mumbai</div>
         </div>
-            <div class="row-box">
-                <div class="event-date">30 OCT</div>
-                <div class="event-name">Enrique Iglesias</div>
-            </div>
+
         <div class="row-box">
-                <div class="event-date">19 NOV</div>
-                <div class="event-name">Travis Scott | Mumbai</div>
+            <div class="event-date">01 OCT</div>
+            <div class="event-name">Parvati Calling VII | Himachal Pradesh</div>
         </div>
+        
         <div class="row-box">
-                <div class="event-date">19 NOV</div>
-                <div class="event-name">Radhika Das</div>
+            <div class="event-date">04 OCT</div>
+            <div class="event-name">DGTL | Mumbai</div>
         </div>
-            
+
+        <div class="row-box">
+            <div class="event-date">04 OCT</div>
+            <div class="event-name">Bollywood Music Project | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">04 OCT</div>
+            <div class="event-name">Jashn-E-Beat | Jaipur</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">05 OCT</div>
+            <div class="event-name">Jashn-E-Beat | Jaipur</div>
+        </div>
+        
+        <div class="row-box">
+            <div class="event-date">05 OCT</div>
+            <div class="event-name">DGTL | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">05 OCT</div>
+            <div class="event-name">Bollywood Music Project | Mumbai</div>
+        </div>
+        
+        <div class="row-box">
+            <div class="event-date">10 OCT</div>
+            <div class="event-name">Sunburn Arena Ft. Francis Mercier | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">11 OCT</div>
+            <div class="event-name">Armaan Malik | Hyderabad</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">11 OCT</div>
+            <div class="event-name">Jazz Weekender 2025 | Delhi</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">12 OCT</div>
+            <div class="event-name">Jazz Weekender 2025 | Delhi</div>
+        </div>
+        
+        <div class="row-box">
+            <div class="event-date">18 OCT</div>
+            <div class="event-name">Travis Scott India Tour | Delhi</div>
+        </div>
+        
+        <div class="row-box">
+            <div class="event-date">19 OCT</div>
+            <div class="event-name">Travis Scott India Tour | Delhi</div>
+        </div>
+        
+        <div class="row-box">
+            <div class="event-date">29 OCT</div>
+            <div class="event-name">Enrique Iglesias | Mumbai</div>
+        </div>
+        
+        <div class="row-box">
+            <div class="event-date">30 OCT</div>
+            <div class="event-name">Enrique Iglesias | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">31 OCT</div>
+            <div class="event-name">India's Biggest Halloween Ft. Talwiinder | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">01 NOV</div>
+            <div class="event-name">Armaan Malik | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">02 Nov</div>
+            <div class="event-name">Krishna Das India Tour | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">15 NOV</div>
+            <div class="event-name">Armaan Malik | Delhi</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">16 Nov</div>
+            <div class="event-name">Akon India Tour | Mumbai</div>
+        </div>
+        
+        <div class="row-box">
+            <div class="event-date">19 NOV</div>
+            <div class="event-name">Travis Scott India Tour | Mumbai</div>
+        </div>
+        
+        <div class="row-box">
+            <div class="event-date">19 NOV</div>
+            <div class="event-name">Radhika Das India Tour | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">20 NOV</div>
+            <div class="event-name">Tech Roast Show | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">22 NOV</div>
+            <div class="event-name">Rolling Loud Festival | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">23 NOV</div>
+            <div class="event-name">Rolling Loud Festival | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">28 NOV</div>
+            <div class="event-name">Max Amini | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">28 NOV</div>
+            <div class="event-name">Smirnoff Experience Ft. AFROJACK | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">28 NOV</div>
+            <div class="event-name">Zamna India | Bengaluru</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">29 NOV</div>
+            <div class="event-name">Smirnoff Experience Ft. AFROJACK | Bengaluru</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">30 NOV</div>
+            <div class="event-name">Smirnoff Experience Ft. AFROJACK | Delhi</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">13 Dec</div>
+            <div class="event-name">Echoes of Earth | Bengaluru</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">14 Dec</div>
+            <div class="event-name">Echoes of Earth | Bengaluru</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">19 Dec</div>
+            <div class="event-name">Sunburn Festival | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">20 Dec</div>
+            <div class="event-name">Sunburn Festival | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">21 Dec</div>
+            <div class="event-name">Sunburn Festival | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">24 Jan</div>
+            <div class="event-name">Lollapalooza India 2026 | Mumbai</div>
+        </div>
+
+        <div class="row-box">
+            <div class="event-date">25 Jan</div>
+            <div class="event-name">Lollapalooza India 2026 | Mumbai</div>
+        </div>
     </div>
 
-    <div>
-        <p style="justify-content: center; display: flex; font-size: 10px;">sortmyentrieshq@gmail.com</p>
-        <p style="justify-content: center; display: flex; font-size: 12px; margin-top: -8px;">&copy; 2025 Sortmyentries. All rights reserved.</p>
+    <div class="footer">
+        <p>sortmyentrieshq@gmail.com</p>
+        <p>&copy; 2025 SortMyEvents. All rights reserved.</p>
     </div>
 
     <script>
-        // JavaScript to filter events based on the search query
-        function filterEvents() {
-            const searchValue = document.getElementById("searchBar").value.toLowerCase();
-            const rows = document.querySelectorAll(".row-box");
-
-            rows.forEach(row => {
-                const eventDate = row.querySelector(".event-date")?.textContent.toLowerCase();
-                const eventName = row.querySelector(".event-name")?.textContent.toLowerCase();
-
-                if (eventDate.includes(searchValue) || eventName.includes(searchValue)) {
-                    row.style.display = ""; // Show matching rows
-                } else {
-                    row.style.display = "none"; // Hide non-matching rows
-                }
-            });
-        }
-
-
-        // JavaScript to add dynamic href to each event row
+        // Animate event rows on page load
         document.addEventListener("DOMContentLoaded", () => {
             const rows = document.querySelectorAll(".row-box");
+            
+            // Animate rows with staggered delay
+            rows.forEach((row, index) => {
+                setTimeout(() => {
+                    row.style.animation = `slideInFromLeft 0.6s ease-out forwards`;
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateX(0)';
+                }, 1500 + (index * 100));
+            });
+
+            // Add WhatsApp links
             rows.forEach(row => {
                 const eventName = row.querySelector(".event-name")?.textContent.trim();
                 if (eventName) {
                     const encodedMessage = encodeURIComponent(`Hey, I want to buy tickets for ${eventName}`);
-                    const phone = "917715039001"; // Default WhatsApp number
+                    const phone = "917715039001";
                     const href = `https://wa.me/${phone}?text=${encodedMessage}`;
-
-                    const anchor = document.createElement("a");
-                    anchor.href = href;
-                    anchor.className = "row-box";
-                    anchor.innerHTML = row.innerHTML;
-
-                    row.replaceWith(anchor); // Replace the original row with the anchor
+                    row.href = href;
+                    row.target = "_blank";
+                    
+                    // Add click animation
+                    row.addEventListener('click', function(e) {
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    });
                 }
             });
+        });
+
+        // Search bar related JS removed
+
+        // Add dynamic animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInFromLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes fadeInScale {
+                from {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes fadeOutScale {
+                from {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                to {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add scroll reveal animation for better UX
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.row-box');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                
+                if (elementTop < windowHeight - 50) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateX(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+
+        // Add subtle parallax effect to header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            header.style.transform = `translateY(${scrolled * 0.2}px)`;
         });
     </script>
 </body>
